@@ -1,0 +1,21 @@
+{
+  "name": "Planner",
+  "base": "User",
+  "idInjection": true,
+  "properties": {
+    "phone": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "plans": {
+      "type": "hasMany",
+      "model": "Plan",
+      "foreignKey": "plannerId"
+    }
+  },
+  "acls": [],
+  "methods": []
+}
