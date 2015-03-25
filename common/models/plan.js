@@ -1,11 +1,11 @@
 
 var Agenda = require('agenda');
 var agenda = new Agenda( {db: { address: 'localhost:27017/agenda-example'}});
+var request = require('request');
 
 
 module.exports = function(Plan) {
 
-    var request = require('request');
     var accessToken;
 
     // agendaes
@@ -19,6 +19,14 @@ module.exports = function(Plan) {
         console.log('[addPlanJob at %s] plannId: %d, ment : %s, attendants\'phone: %s, scheduledAt: %s',
             Date.now(),
             job.attrs.data.id,job.attrs.data.ment.name, job.attrs.data.attendants.phone, job.attrs.data.scheduledAt);
+
+
+        request('http://www.google.com', function (error, response, body) {
+          if (!error && response.statusCode == 200) {
+          console.log(body) // Show the HTML for the Google homepage.
+          };
+        });
+
         done();
     });
 
