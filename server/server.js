@@ -1,6 +1,13 @@
 var loopback = require('loopback');
 var boot = require('loopback-boot');
 
+// Add express middleware
+var request = require('request');
+
+// Add job scheduler
+//var Agenda = require('agenda');
+//var agenda = new Agenda({db: {address:'localhost:27017/agenda-example'}});
+
 var app = module.exports = loopback();
 
 app.start = function() {
