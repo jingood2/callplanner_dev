@@ -8,30 +8,37 @@ module.exports = function(Plan) {
 
     var accessToken;
 
-    // agendaes
-    agenda.define ('notification', function(job, done) {
-        console.log('[Notification]');
 
-        done();
-    });
 
+    // define Job
+    requestCallToAS = function(name) {
+      agenda.define (name, function(job,done) {
+
+        // ToDo : request Conference to AS
+        console.log('[addPlanJob_%d] plannId: %d, ment : %s, attendants\'phone: %s, scheduledAt: %s',
+          job.attrs.data.id,
+          job.attrs.data.id, job.attrs.data.ment.name, job.attrs.data.attendants.phone, job.attrs.data.scheduledAt);
+      });
+    };
     agenda.define ('addPlanJob', function(job,done) {
-        console.log('[addPlanJob at %s] plannId: %d, ment : %s, attendants\'phone: %s, scheduledAt: %s',
-            Date.now(),
+        console.log('[addPlanJob_%d] plannId: %d, ment : %s, attendants\'phone: %s, scheduledAt: %s',
+            job.attrs.data.id,
             job.attrs.data.id,job.attrs.data.ment.name, job.attrs.data.attendants.phone, job.attrs.data.scheduledAt);
 
 
+      /*
         request('http://www.google.com', function (error, response, body) {
           if (!error && response.statusCode == 200) {
           console.log(body) // Show the HTML for the Google homepage.
           };
         });
+      */
 
         done();
     });
 
     agenda.define ('addAttendantNotiJob', function(job,done) {
-        console.log('Push Notification to attendants at %s', Date.now());
+        console.log('[Pushjob_%d]Push Notification to attendants at %s',job.attrs.data.id, Date.now());
         done();
     });
 
@@ -47,19 +54,28 @@ module.exports = function(Plan) {
 
     Plan.observe('after save', function(ctx, next) {
 
+      var planJobName;
+      var notiJobName;
+
       if(ctx.instance) {
 
-        console.log('Saved %s#%s %s' , ctx.Model.modelName, ctx.instance.id, ctx.instance.scheduledAt);
+        // planId is unique id
+        planJobName = String(ctx.instance.id);
 
-        // Create job
+        requestCallToAS(planJobName);
+        var job = agenda.create(planJobName,ctx.instance );
+        job.repeatEvery('1 minute');
+        job.save();
 
-        ctx.planId = ctx.instance.id;
-
-        agenda.every("3 minutes" , 'addPlanJob', ctx.instance);
+        /*
+        agenda.schedule("3 minutes" ,'addPlanJob', ctx.instance);
         console.log('PlanCall will be after 3 minutes');
 
+
         // ctx.instance is plan instance
-        agenda.every('2 minutes', 'addAttendantNotiJob', ctx.instance);
+        agenda.schedule('2 minutes', 'addAttendantNotiJob', ctx.instance);
+        console.log('Push noti will be after 2 minutes');
+        */
 
         // ToDo : Push Notification
         //agenda.now('push');
@@ -75,15 +91,9 @@ module.exports = function(Plan) {
 
     Plan.observe('after delete', function(ctx, next) {
 
-      console.log('Deleted %s matching %j', ctx.Model.app.name, ctx.where);
 
-
-      agenda.jobs({name: 'addAttendantNotiJob'},function(err, jobs) {
-        console.log('Job name: %s', jobs.name);
-      });
-
-      agenda.cancel({name: 'addAttendantNotiJob'},function(err,result) {
-        console.log(result);
+      agenda.cancel({name: '1'},function(err,numRemoved) {
+        console.log('numRemoved : ' + numRemoved);
       });
 
       // delete job schedule with ctx.where
@@ -97,7 +107,6 @@ module.exports = function(Plan) {
     });
 
     Plan.observe('before delete', function(ctx, next) {
-        console.log('> beforeDestroy triggered');
         next();
     });
 
