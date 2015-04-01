@@ -3,26 +3,30 @@
  */
 var Agenda = require('agenda');
 var request = require('request');
+var dateUtil = require('../utils/date');
 
 var agenda = new Agenda({db: {address: 'localhost:27017/agenda-example'}});
 
-exports.reqCall = function (jobName, modelInstance) {
+exports.reqCall = function (jobName, plan) {
 
     // job.attr.data -> plan instance
     agenda.define(jobName, function (job, done) {
 
       var jsonObject = {};
-      var testJsonObj = { "requestCmd" : "INIT",
-                          "phoneNumber" : "01052777581",
-                          "roomName" : "room1",
-                          "attedant" : "",
-                          "roomId" : "",
-                          "recordOpt" : "true"
+      var testJsonObj = { "method" : "INIT",
+                          "id": jobName,
+                          "record": false,
+                          "callType" : "planCall",
+                          "greetingAnn" : "default.wav",
+                          /*
+                          "attendants" : [ { "tel" : "01044929599", "role": "owner" },
+                            {"tel" : "01052777581", "role": "member"} ]
+                           */
+
+                          "attendants" : job.attrs.data.attendants
                           };
 
-      console.log('[addPlanJob_%d] plannId: %d, ment : %s, attendants\'phone: %s, scheduledAt: %s',
-        job.attrs.data.id,
-        job.attrs.data.id, job.attrs.data.ment.name, job.attrs.data.attendants.phone, job.attrs.data.scheduledAt);
+      console.log(JSON.stringify(testJsonObj));
 
       /*
        request('http://www.google.com', function (error, response, body) {
@@ -32,9 +36,8 @@ exports.reqCall = function (jobName, modelInstance) {
        });
        */
 
-      /*
       request({
-        url: "192.168.100.144:9087/FamilyCallCore/FamilyCallHttpServlet",
+        url: "http://221.146.204.182:9087/FamilyCallCore/FamilyCallHttpServlet",
         method: "POST",
         json: true,
         body: testJsonObj
@@ -44,16 +47,18 @@ exports.reqCall = function (jobName, modelInstance) {
           console.log(body);
         };
       });
-      */
       done();
 
     });
 
-    var job = agenda.create(jobName, modelInstance);
-    job.repeatEvery('5 minutes');
-    job.save(function (err) {
-      if(err) console.log(err);
-    });
+    if(plan.repeat == 'none') {
+      console.log('repeat : %s', plan.repeat);
+      agenda.schedule(dateUtil.planStartAt(plan.repeat,plan.scheduledAt),jobName,plan);
+      //agenda.schedule('in 3 minutes',jobName,plan);
+      //agenda.now(jobName,plan);
+    } else {
+      agenda.every(dateUtil.planStartAt(plan.repeat,plan.scheduledAt),jobName,plan);
+    }
 
     agenda.start();
 };

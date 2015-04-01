@@ -11,45 +11,18 @@ module.exports = function(Plan) {
 
     var accessToken;
 
-    // define Job
-
-    /*
-    defineCallRequestJob = function(name) {
-      agenda.define (name, function(job,done) {
-
-        // ToDo : request Conference to AS
-        console.log('[addPlanJob_%d] plannId: %d, ment : %s, attendants\'phone: %s, scheduledAt: %s',
-          job.attrs.data.id,
-          job.attrs.data.id, job.attrs.data.ment.name, job.attrs.data.attendants.phone, job.attrs.data.scheduledAt);
-      });
-    };
-    agenda.define ('addPlanJob', function(job,done) {
-        console.log('[addPlanJob_%d] plannId: %d, ment : %s, attendants\'phone: %s, scheduledAt: %s',
-            job.attrs.data.id,
-            job.attrs.data.id,job.attrs.data.ment.name, job.attrs.data.attendants.phone, job.attrs.data.scheduledAt);
-
-
-        request('http://www.google.com', function (error, response, body) {
-          if (!error && response.statusCode == 200) {
-          console.log(body) // Show the HTML for the Google homepage.
-          };
-        });
-
-        done();
-    });
-
-    agenda.define ('addAttendantNotiJob', function(job,done) {
-        console.log('[Pushjob_%d]Push Notification to attendants at %s',job.attrs.data.id, Date.now());
-        done();
-    });
-    */
 
     Plan.beforeRemote('create', function(ctx, user, next) {
 
       var req = ctx.req;
+      //var tmpDate = "2015-04-01T15:00:00Z";
+      //var now_date = new Date(tmpDate);
+      var now_date = new Date(req.body.scheduledAt);
 
-      //req.body.scheduledAt = Date.now();
+      console.log('Date:%s WeekDay:%s getDate:%s ', now_date.toLocaleDateString(), now_date.getDay(), now_date.getDate());
+
       req.body.plannerId = req.accessToken.userId;
+      req.body.scheduledAt = now_date;
       next();
 
     });
@@ -60,8 +33,7 @@ module.exports = function(Plan) {
 
         ctx.instance.modified = new Date();
         console.log('[Operation hook] before created..');
-
-        console.log(ctx);
+        //console.log(ctx);
 
       }else {
         ctx.data.modified = new Date();
@@ -76,7 +48,7 @@ module.exports = function(Plan) {
 
     Plan.observe('after save', function(ctx, next) {
 
-      var planJobName;
+      var agendaJobId;
       var notiJobName;
 
 
@@ -89,10 +61,10 @@ module.exports = function(Plan) {
          */
         console.log('[Operation hook] after created..');
 
-        planJobName = String(ctx.instance.id);
+        agendaJobId = String(ctx.instance.id);
 
         // define planCall job for planId
-        planCallJob.reqCall(planJobName,ctx.instance);
+        planCallJob.reqCall(agendaJobId,ctx.instance);
 
         // ToDo : Push Notification
 
@@ -101,13 +73,13 @@ module.exports = function(Plan) {
         console.log('[Operation hook] after updated..');
 
         /*
-        planJobName = String(ctx.data.id);
+        agendaJobId = String(ctx.data.id);
 
-        console.log('[Remote hook]before delete : %s', planJobName);
-        planCallJob.deleteCall(planJobName);
+        console.log('[Remote hook]before delete : %s', agendaJobId);
+        planCallJob.deleteCall(agendaJobId);
 
-        console.log('[Remote hook]before update : %s', planJobName);
-        planCallJob.reqCall(planJobName,ctx.data);
+        console.log('[Remote hook]before update : %s', agendaJobId);
+        planCallJob.reqCall(agendaJobId,ctx.data);
         */
       }
       next();
