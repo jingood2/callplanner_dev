@@ -15,14 +15,8 @@ module.exports = function(Plan) {
     Plan.beforeRemote('create', function(ctx, user, next) {
 
       var req = ctx.req;
-      //var tmpDate = "2015-04-01T15:00:00Z";
-      //var now_date = new Date(tmpDate);
-      var now_date = new Date(req.body.scheduledAt);
-
-      console.log('Date:%s WeekDay:%s getDate:%s ', now_date.toLocaleDateString(), now_date.getDay(), now_date.getDate());
 
       req.body.plannerId = req.accessToken.userId;
-      req.body.scheduledAt = now_date;
       next();
 
     });
@@ -32,7 +26,7 @@ module.exports = function(Plan) {
       if(ctx.instance) {
 
         ctx.instance.modified = new Date();
-        console.log('[Operation hook] before created..');
+        console.log('[Operation hook] before created at %s' );
         //console.log(ctx);
 
       }else {

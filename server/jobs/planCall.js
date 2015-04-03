@@ -52,10 +52,7 @@ exports.reqCall = function (jobName, plan) {
     });
 
     if(plan.repeat == 'none') {
-      console.log('repeat : %s', plan.repeat);
       agenda.schedule(dateUtil.planStartAt(plan.repeat,plan.scheduledAt),jobName,plan);
-      //agenda.schedule('in 3 minutes',jobName,plan);
-      //agenda.now(jobName,plan);
     } else {
       agenda.every(dateUtil.planStartAt(plan.repeat,plan.scheduledAt),jobName,plan);
     }

@@ -8,14 +8,13 @@ exports.planStartAt = (function(repeat,scheduledAt) {
   var startDate = scheduledAt;
   var whichday;
 
-  console.log('Weekday : %s', whichday)
+  console.log('scheduledAt : %s min:%s hour:%s day:%s', startDate, startDate.getMinutes(),startDate.getHours(),startDate.getDate());
 
   switch(repeat) {
 
     case 'none' :
       return scheduledAt;
     case 'daily' :
-      format =  'at ' + startDate.getHours() + ':' + startDate.getMinutes();
       format = startDate.getMinutes() + ' ' + startDate.getHours() + ' ' + '* * *';
       console.log(format);
       return format;

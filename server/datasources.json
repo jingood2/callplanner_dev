@@ -6,5 +6,12 @@
   "mongoDs": {
     "name": "mongoDs",
     "connector": "mongodb"
+  },
+
+  "storage" : {
+    "name" : "storage",
+    "container" : "loopback-component-storage",
+    "provider" : "filesystem",
+    "root" : "./server/storage"
   }
 }
