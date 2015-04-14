@@ -12,7 +12,7 @@
   },
   "validations": [],
   "relations": {
-    "plan": {
+    "planner": {
       "type": "belongsTo",
       "model": "Planner",
       "foreignKey": "plannerId"

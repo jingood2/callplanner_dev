@@ -57,6 +57,7 @@ exports.reqCall = function (jobName, plan) {
 
                 CallHistory.create({
                     planId: job.attrs.data.id,
+                    plannerId: job.attrs.data.plannerId,
                     planInfo : {
                         'title': job.attrs.data.title,
                         'enabled': job.attrs.data.enabled,
