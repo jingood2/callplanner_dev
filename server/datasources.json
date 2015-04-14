@@ -7,11 +7,16 @@
     "name": "mongoDs",
     "connector": "mongodb"
   },
-
-  "storage" : {
-    "name" : "storage",
-    "container" : "loopback-component-storage",
-    "provider" : "filesystem",
-    "root" : "./server/storage"
+  "mentStorage": {
+    "name": "mentStorage",
+    "connector": "loopback-storage-service",
+    "provider": "filesystem",
+    "root": "/Users/admin/nfs/ments"
+  },
+  "imageStorage": {
+    "name": "imageStorage",
+    "connector": "loopback-storage-service",
+    "provider": "filesystem",
+    "root": "/Users/admin/nfs/images"
   }
 }

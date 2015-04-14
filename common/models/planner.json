@@ -14,6 +14,11 @@
       "type": "hasMany",
       "model": "Plan",
       "foreignKey": "plannerId"
+    },
+    "callHistories": {
+      "type": "hasMany",
+      "model" : "callHistory",
+      "foreignKey": "plannerId"
     }
   },
   "acls": [],

@@ -9,6 +9,9 @@
     "callType": {
       "type": "string"
     },
+    "record": {
+      "type": "boolean"
+    },
     "ment": {
       "type": "object"
     },
@@ -22,6 +25,9 @@
       "type": [
         "object"
       ]
+    },
+    "title": {
+      "type": "string"
     }
   },
   "validations": [],

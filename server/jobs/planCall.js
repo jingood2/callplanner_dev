@@ -5,52 +5,82 @@ var Agenda = require('agenda');
 var request = require('request');
 var dateUtil = require('../utils/date');
 
+var app = require('../server');
+
 var agenda = new Agenda({db: {address: 'localhost:27017/agenda-example'}});
 
 exports.reqCall = function (jobName, plan) {
 
-    // job.attr.data -> plan instance
+    // define job for planId
     agenda.define(jobName, function (job, done) {
 
-      var jsonObject = {};
-      var testJsonObj = { "method" : "INIT",
-                          "id": jobName,
-                          "record": false,
-                          "callType" : "planCall",
-                          "greetingAnn" : "default.wav",
-                          /*
-                          "attendants" : [ { "tel" : "01044929599", "role": "owner" },
-                            {"tel" : "01052777581", "role": "member"} ]
-                           */
+        var reqBody = {};
+        var ment = '';
+        var reqCallResult ;
 
-                          "attendants" : job.attrs.data.attendants
-                          };
+        // get a reference to models
+        var CallHistory = app.models.callHistory;
+        var planInfo = [];
 
-      console.log(JSON.stringify(testJsonObj));
+        console.log(CallHistory.modelName);
 
-      /*
-       request('http://www.google.com', function (error, response, body) {
-           if (!error && response.statusCode == 200) {
-           console.log(body) // Show the HTML for the Google homepage.
-           };
-       });
-       */
+        // planCall off
+        if(job.attrs.data.enabled == false) {
+            console.log('disabled planCall id : ' + job.attrs.data.id);
+            done();
+            return;
+        }
 
-      request({
+        if(job.attrs.data.ment.file)
+            ment = 'ments/' + job.attrs.data.ment.container + '/' + job.attrs.data.ment.file;
+
+        reqBody = {
+            "method" : "INIT",
+            "id": jobName,
+            "record": job.attrs.data.record,
+            "callType" : job.attrs.data.callType,
+            "greetingAnn" : ment,
+            "attendants" : job.attrs.data.attendants };
+
+        console.log(JSON.stringify(reqBody));
+
+        request({
         url: "http://221.146.204.182:9087/FamilyCallCore/FamilyCallHttpServlet",
         method: "POST",
         json: true,
-        body: testJsonObj
-      }, function( error, response, body ) {
+        body: reqBody
+        }, function( error, response, body ) {
 
-        if(!error && response.statusCode == 200) {
-          console.log(body);
-        };
-      });
-      done();
+            if(!error && response.statusCode == 200) {
 
+                var calledAt = new Date();
+
+                CallHistory.create({
+                    planId: job.attrs.data.id,
+                    planInfo : {
+                        'title': job.attrs.data.title,
+                        'enabled': job.attrs.data.enabled,
+                        'callType': job.attrs.data.callType,
+                        'record': job.attrs.data.record,
+                        'ment': job.attrs.data.ment,
+                        'scheduledAt': job.attrs.data.scheduledAt,
+                        'repeat': job.attrs.data.repeat,
+                        'attendants': job.attrs.data.attendants},
+                    planCalledAt : calledAt,
+                    result : response.statusCode},function(err,obj) {
+
+                    if(error) {
+                        console.log(err);
+                    }
+                });
+
+            };
+        });
+
+        done();
     });
 
+    // run job for planId
     if(plan.repeat == 'none') {
       agenda.schedule(dateUtil.planStartAt(plan.repeat,plan.scheduledAt),jobName,plan);
     } else {

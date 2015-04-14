@@ -1,0 +1,23 @@
+{
+  "name": "callHistory",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "properties": {
+    "planInfo": {
+      "type": "object"
+    },
+    "planCalledAt": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "plan": {
+      "type": "belongsTo",
+      "model": "Planner",
+      "foreignKey": "plannerId"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

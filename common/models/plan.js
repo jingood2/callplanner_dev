@@ -26,7 +26,7 @@ module.exports = function(Plan) {
       if(ctx.instance) {
 
         ctx.instance.modified = new Date();
-        console.log('[Operation hook] before created at %s' );
+        console.log('[Operation hook] before created at %s',  ctx.instance.modified  );
         //console.log(ctx);
 
       }else {
@@ -59,6 +59,9 @@ module.exports = function(Plan) {
 
         // define planCall job for planId
         planCallJob.reqCall(agendaJobId,ctx.instance);
+
+
+
 
         // ToDo : Push Notification
 

@@ -33,5 +33,17 @@
   "Plan": {
     "dataSource": "db",
     "public": true
+  },
+  "mentContainer": {
+    "dataSource": "mentStorage",
+    "public": true
+  },
+  "imageContainer": {
+    "dataSource": "imageStorage",
+    "public": true
+  },
+  "callHistory": {
+    "dataSource": "db",
+    "public": true
   }
 }
