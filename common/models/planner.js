@@ -7,8 +7,6 @@ module.exports = function(Planner) {
     var req = ctx.req;
     var host = req.headers.host;
 
-    console.log(req.headers.host);
-
     request({
       url: 'http://' + host + '/api/mentContainers',
       method: "POST",

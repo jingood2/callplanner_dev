@@ -11,7 +11,6 @@ module.exports = function(Plan) {
 
     var accessToken;
 
-
     Plan.beforeRemote('create', function(ctx, user, next) {
 
       var req = ctx.req;

@@ -82,7 +82,7 @@ exports.reqCall = function (jobName, plan) {
     });
 
     // run job for planId
-    if(plan.repeat == 'none') {
+    if(plan.repeat == 'once') {
       agenda.schedule(dateUtil.planStartAt(plan.repeat,plan.scheduledAt),jobName,plan);
     } else {
       agenda.every(dateUtil.planStartAt(plan.repeat,plan.scheduledAt),jobName,plan);
