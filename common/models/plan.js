@@ -9,7 +9,6 @@ var planCallJob = require('../../server/jobs/planCall');
 
 module.exports = function(Plan) {
 
-    var accessToken;
 
     Plan.beforeRemote('create', function(ctx, user, next) {
 
@@ -27,13 +26,12 @@ module.exports = function(Plan) {
         ctx.instance.modified = new Date();
         console.log('[Operation hook] before created at %s',  ctx.instance.modified  );
         //console.log(ctx);
-
       }else {
         ctx.data.modified = new Date();
         planJobName = String(ctx.where.id);
 
         console.log('[Operation hook]before update : %s', planJobName);
-        planCallJob.deleteCall(planJobName);
+        //planCallJob.deleteCall(planJobName);
       }
       next();
 
@@ -42,8 +40,6 @@ module.exports = function(Plan) {
     Plan.observe('after save', function(ctx, next) {
 
       var agendaJobId;
-      var notiJobName;
-
 
       if(ctx.instance) {
 

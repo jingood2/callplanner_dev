@@ -14,9 +14,8 @@ exports.reqCall = function (jobName, plan) {
     // define job for planId
     agenda.define(jobName, function (job, done) {
 
-        var reqBody = {};
+        var reqBody;
         var ment = '';
-        var reqCallResult ;
 
         // get a reference to models
         var CallHistory = app.models.callHistory;
@@ -75,20 +74,33 @@ exports.reqCall = function (jobName, plan) {
                     }
                 });
 
-            };
+            }
         });
 
         done();
     });
 
+    var job = agenda.create(jobName,plan);
+    job.attrs.type = 'single';
+
     // run job for planId
     if(plan.repeat == 'once') {
-      agenda.schedule(dateUtil.planStartAt(plan.repeat,plan.scheduledAt),jobName,plan);
+        job.schedule(dateUtil.planStartAt(plan.repeat,plan.scheduledAt));
+      //agenda.schedule(dateUtil.planStartAt(plan.repeat,plan.scheduledAt),jobName,plan);
+        //agenda.every(dateUtil.planStartAt(plan.repeat,plan.scheduledAt),jobName,plan);
+
     } else {
-      agenda.every(dateUtil.planStartAt(plan.repeat,plan.scheduledAt),jobName,plan);
+      //agenda.every(dateUtil.planStartAt(plan.repeat,plan.scheduledAt),jobName,plan);
+        //agenda.every(dateUtil.planStartAt(plan.repeat,plan.scheduledAt),jobName,plan);
+        job.repeatEvery(dateUtil.planStartAt(plan.repeat,plan.scheduledAt));
     }
 
-    agenda.start();
+    job.save(function(err) {
+        if(err) {
+            console.log('SaveJob Error :' + err);
+        }
+    });
+
 };
 
 exports.deleteCall = function(jobName) {
