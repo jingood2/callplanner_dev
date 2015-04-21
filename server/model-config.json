@@ -8,30 +8,30 @@
     ]
   },
   "User": {
-    "dataSource": "db"
+    "dataSource": "mongoDs"
   },
   "AccessToken": {
-    "dataSource": "db",
+    "dataSource": "mongoDs",
     "public": false
   },
   "ACL": {
-    "dataSource": "db",
+    "dataSource": "mongoDs",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "db",
+    "dataSource": "mongoDs",
     "public": false
   },
   "Role": {
-    "dataSource": "db",
+    "dataSource": "mongoDs",
     "public": false
   },
   "Planner": {
-    "dataSource": "db",
+    "dataSource": "mongoDs",
     "public": true
   },
   "Plan": {
-    "dataSource": "db",
+    "dataSource": "mongoDs",
     "public": true
   },
   "mentContainer": {
@@ -43,7 +43,7 @@
     "public": true
   },
   "callHistory": {
-    "dataSource": "db",
+    "dataSource": "mongoDs",
     "public": true
   }
 }

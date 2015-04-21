@@ -101,6 +101,7 @@ exports.reqCall = function (jobName, plan) {
         }
     });
 
+    agenda.start();
 };
 
 exports.deleteCall = function(jobName) {

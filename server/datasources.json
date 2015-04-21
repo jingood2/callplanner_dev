@@ -4,8 +4,12 @@
     "connector": "memory"
   },
   "mongoDs": {
+    "host": "127.0.0.1",
+    "port": 27017,
+    "database": "callPlanner_db",
+    "connector": "mongodb",
     "name": "mongoDs",
-    "connector": "mongodb"
+    "user": "callPlanner"
   },
   "mentStorage": {
     "name": "mentStorage",
