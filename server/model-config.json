@@ -42,6 +42,10 @@
     "dataSource": "imageStorage",
     "public": true
   },
+  "recordContainer": {
+    "dataSource": "recordStorage",
+    "public": true
+  },
   "callHistory": {
     "dataSource": "mongoDs",
     "public": true

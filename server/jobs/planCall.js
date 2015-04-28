@@ -16,6 +16,7 @@ exports.reqCall = function (jobName, plan) {
 
         var reqBody;
         var ment = '';
+        var recordFilename;
 
         // get a reference to models
         var CallHistory = app.models.callHistory;
@@ -33,10 +34,14 @@ exports.reqCall = function (jobName, plan) {
         if(job.attrs.data.ment.file)
             ment = 'ments/' + job.attrs.data.ment.container + '/' + job.attrs.data.ment.file;
 
+        recordFilename = new Date().toISOString() + '.wav';
+        console.log('recordFile :' + recordFilename);
+
         reqBody = {
             "method" : "INIT",
             "id": jobName,
             "record": job.attrs.data.record,
+            "recordFilename" : recordFilename,
             "callType" : job.attrs.data.callType,
             "greetingAnn" : ment,
             "attendants" : job.attrs.data.attendants };
@@ -62,6 +67,7 @@ exports.reqCall = function (jobName, plan) {
                         'enabled': job.attrs.data.enabled,
                         'callType': job.attrs.data.callType,
                         'record': job.attrs.data.record,
+                        'recordFilename' : recordFilename,
                         'ment': job.attrs.data.ment,
                         'scheduledAt': job.attrs.data.scheduledAt,
                         'repeat': job.attrs.data.repeat,

@@ -17,7 +17,7 @@
     },
     "callHistories": {
       "type": "hasMany",
-      "model" : "callHistory",
+      "model": "callHistory",
       "foreignKey": "plannerId"
     }
   },
