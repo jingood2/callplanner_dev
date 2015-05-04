@@ -1,9 +1,3 @@
-
-/*
-var Agenda = require('agenda');
-var agenda = new Agenda( {db: { address: 'localhost:27017/agenda-example'}});
-*/
-
 var request = require('request');
 var planCallJob = require('../../server/jobs/planCall');
 
@@ -25,13 +19,11 @@ module.exports = function(Plan) {
 
         ctx.instance.modified = new Date();
         console.log('[Operation hook] before created at %s',  ctx.instance.modified  );
-        //console.log(ctx);
       }else {
         ctx.data.modified = new Date();
         planJobName = String(ctx.where.id);
 
         console.log('[Operation hook]before update : %s', planJobName);
-        //planCallJob.deleteCall(planJobName);
       }
       next();
 
@@ -85,11 +77,14 @@ module.exports = function(Plan) {
               noti.push(planner.id);
             });
 
-            message = '[Title:' + ctx.instance.title  + ']' + 'You were invited from ....';
+            //message = '[Title:' + ctx.instance.title  + ']' + 'You were invited from 'xxx' at time ';
 
             var reqBody = {
-              noti : noti,
-              message : message };
+              noti: noti,
+              title: ctx.instance.title,
+              attendant: ctx.instance.attendants,
+              scheduledAt: ctx.instance.scheduledAt
+            };
 
             request({
                   url: 'http://' + config.notiHost + ':' + config.notiPort + '/notify/' + '1111',
