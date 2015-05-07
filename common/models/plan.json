@@ -19,7 +19,8 @@
       "type": "date"
     },
     "repeat": {
-      "type": "string"
+      "type": "string",
+      "default": "once"
     },
     "attendants": {
       "type": [

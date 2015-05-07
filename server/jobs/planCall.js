@@ -92,12 +92,8 @@ exports.reqCall = function (jobName, plan) {
     // run job for planId
     if(plan.repeat == 'once') {
         job.schedule(dateUtil.planStartAt(plan.repeat,plan.scheduledAt));
-      //agenda.schedule(dateUtil.planStartAt(plan.repeat,plan.scheduledAt),jobName,plan);
-        //agenda.every(dateUtil.planStartAt(plan.repeat,plan.scheduledAt),jobName,plan);
 
     } else {
-      //agenda.every(dateUtil.planStartAt(plan.repeat,plan.scheduledAt),jobName,plan);
-        //agenda.every(dateUtil.planStartAt(plan.repeat,plan.scheduledAt),jobName,plan);
         job.repeatEvery(dateUtil.planStartAt(plan.repeat,plan.scheduledAt));
     }
 

@@ -1,4 +1,5 @@
 var request = require('request');
+//var logger = require('strong-logger');
 
 module.exports = function(Planner) {
 
@@ -7,6 +8,8 @@ module.exports = function(Planner) {
     var req = ctx.req;
     var host = req.headers.host;
 
+    log.info('Created user...');
+
     request({
       url: 'http://' + host + '/api/mentContainers',
       method: "POST",
@@ -14,7 +17,7 @@ module.exports = function(Planner) {
       body: { "name" : req.body.phone}
     }, function( error, response, body ) {
       if(error)
-        console.log(error);
+        log.error(error);
     });
 
     request({
@@ -24,7 +27,7 @@ module.exports = function(Planner) {
       body: { "name" : req.body.phone}
     }, function( error, response, body ) {
       if(error)
-        console.log(error);
+        log.error(error);
     });
     next();
 

@@ -26,7 +26,6 @@ exports.authenticationEnabled = false;
 function readCredentialsFile(name) {
     return fs.readFileSync(
         path.resolve(__dirname, '../credentials', name),
-        //path.resolve(, 'credentials', name),
         'UTF-8'
     );
 }

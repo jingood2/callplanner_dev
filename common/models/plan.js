@@ -1,5 +1,5 @@
 var request = require('request');
-var planCallJob = require('../../server/jobs/planCall');
+var planCallJob = require(__dirname + '/../../server/jobs/planCall');
 
 module.exports = function(Plan) {
 
@@ -18,12 +18,12 @@ module.exports = function(Plan) {
       if(ctx.instance) {
 
         ctx.instance.modified = new Date();
-        console.log('[Operation hook] before created at %s',  ctx.instance.modified  );
+        log.info('[Operation hook] before created at %s',  ctx.instance.modified  );
       }else {
         ctx.data.modified = new Date();
         planJobName = String(ctx.where.id);
 
-        console.log('[Operation hook]before update : %s', planJobName);
+        log.info('[Operation hook]before update : %s', planJobName);
       }
       next();
 
@@ -45,8 +45,6 @@ module.exports = function(Plan) {
           * 1. planCall job
           * 2. (ToDo) push notification job
           */
-          console.log('[Operation hook] after created..');
-
           agendaJobId = String(ctx.instance.id);
 
           // define planCall job for planId
@@ -59,18 +57,15 @@ module.exports = function(Plan) {
             phones.push(attendant.tel);
           });
 
-          console.log(phones);
+          log.info(phones);
 
           var Planner = app.models.Planner;
 
           Planner.find( {where: { phone: {inq: phones}}},function(err,planners) {
-            /*
              if(err) {
-             console.log(err);
-             next();
+                log.error(err);
+                next();
              }
-             */
-            console.log(err);
 
 
             planners.forEach(function(planner) {
@@ -94,43 +89,17 @@ module.exports = function(Plan) {
                   }, function( error, response, body ) {
 
                   if(!error && response.statusCode == 200)
-                      console.log(body);
+                      log.info(body);
                   else
-                      console.log(error);
-
-
-            });
-
-            /*
-            planners.forEach(function(planner) {
-              //;noti.push(planner.id);
-
-              request({
-                url: 'http://' + config.notiHost + ':' + config.notiPort + '/notify/' +  encodeURIComponent(planner.id),
-                method: "POST",
-                json: false
-              }, function( error, response, body ) {
-
-                if(!error && response.statusCode == 200)
-                  console.log(body);
-                else
-                  console.log(error);
-
-
-              });
+                      log.error(error);
 
             });
-            */
-
-
-
-
 
           });
 
       } else {
 
-        console.log('[Operation hook] after updated..');
+        log.info('[Operation hook] after updated..');
 
         /*
         agendaJobId = String(ctx.data.id);
