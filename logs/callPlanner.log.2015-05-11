@@ -55,3 +55,17 @@
 {"level":"info","message":"Web server listening at: http://192.168.4.29:3000/","timestamp":"2015-05-11T08:04:16.221Z"}
 {"level":"info","message":"Web server listening at: http://192.168.4.29:3000/","timestamp":"2015-05-11T08:12:01.071Z"}
 {"level":"info","message":"Web server listening at: http://192.168.4.29:3000/","timestamp":"2015-05-11T08:16:16.440Z"}
+{"level":"info","message":"Web server listening at: http://localhost:3000/","timestamp":"2015-05-11T11:29:48.611Z"}
+{"level":"info","message":"Web server listening at: http://192.168.0.95:3000/","timestamp":"2015-05-11T11:35:25.880Z"}
+{"level":"info","message":"Web server listening at: http://192.168.0.95:3000/","timestamp":"2015-05-11T12:00:05.568Z"}
+{"level":"info","message":"Web server listening at: http://192.168.0.95:3000/","timestamp":"2015-05-11T12:11:24.514Z"}
+{"level":"info","message":"Web server listening at: http://192.168.0.95:3000/","timestamp":"2015-05-11T12:12:35.238Z"}
+{"level":"info","message":"Web server listening at: http://192.168.0.95:3000/","timestamp":"2015-05-11T12:15:56.563Z"}
+{"level":"info","message":"Web server listening at: http://192.168.0.95:3000/","timestamp":"2015-05-11T12:18:02.775Z"}
+{"level":"info","message":"Web server listening at: http://192.168.0.95:3000/","timestamp":"2015-05-11T12:26:30.615Z"}
+{"level":"info","message":"Web server listening at: http://192.168.0.95:3000/","timestamp":"2015-05-11T12:28:24.009Z"}
+{"level":"info","message":"Web server listening at: http://192.168.0.95:3000/","timestamp":"2015-05-11T12:30:47.008Z"}
+{"level":"info","message":"Web server listening at: http://192.168.0.95:3000/","timestamp":"2015-05-11T12:33:00.315Z"}
+{"level":"info","message":"Web server listening at: http://192.168.0.95:3000/","timestamp":"2015-05-11T12:38:14.626Z"}
+{"level":"info","message":"Web server listening at: http://192.168.0.95:3000/","timestamp":"2015-05-11T12:43:33.367Z"}
+{"level":"info","message":"Web server listening at: http://192.168.0.95:3000/","timestamp":"2015-05-11T12:48:39.396Z"}

@@ -8,7 +8,8 @@ angular
     $stateProvider
       .state('home', {
         url: '/home',
-        templateUrl: 'views/home.html'
+        templateUrl: 'views/home.html',
+        controller: 'SignUpController'
       })
       .state('features', {
         url: '/features',
@@ -58,10 +59,10 @@ angular
       .state('signup', {
         url: '/signup',
         templateUrl: 'views/sign-up.html',
-        controller: 'SignUpController',
+        controller: 'SignUpController'
       })
       .state('sign-up-success', {
-        url: '/sign-up/success',
+        url: '/signup/success',
         templateUrl: 'views/sign-up-success.html'
       });
     $urlRouterProvider.otherwise('home');

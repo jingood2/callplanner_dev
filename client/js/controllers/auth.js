@@ -2,13 +2,10 @@ angular
   .module('app')
   .controller('AuthLoginController', ['$scope', 'AuthService', '$state',
       function($scope, AuthService, $state) {
-    $scope.user = {
-      email: 'foo@bar.com',
-      password: 'foobar'
-    };
+    $scope.planner = {};
 
     $scope.login = function() {
-      AuthService.login($scope.user.email, $scope.user.password)
+      AuthService.login($scope.planner.email, $scope.planner.password)
         .then(function() {
           $state.go('add-review');
         });
@@ -23,13 +20,10 @@ angular
   }])
   .controller('SignUpController', ['$scope', 'AuthService', '$state',
       function($scope, AuthService, $state) {
-    $scope.user = {
-      email: 'baz@qux.com',
-      password: 'bazqux'
-    };
+    $scope.planner = {};
 
     $scope.register = function() {
-      AuthService.register($scope.user.email, $scope.user.password)
+      AuthService.register($scope.planner.email, $scope.planner.password, $scope.planner.phone)
         .then(function() {
           $state.transitionTo('sign-up-success');
         });
