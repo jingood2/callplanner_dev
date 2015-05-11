@@ -1,202 +1,158 @@
-﻿<!DOCTYPE html>
-<html id="ng-app" ng-app="app"> <!-- id="ng-app" IE<8 -->
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
 
 <head>
-    <title>LoopBack Storage Service Demo</title>
-    <link rel="stylesheet"
-          href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CallPlanner - Plan your call</title>
 
-    <!-- Fix for old browsers -->
-    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
-    <!--<script src="../bower_components/angular/angular.js"></script>-->
-    <script src="http://code.angularjs.org/1.2.9/angular.min.js"></script>
-    <script src="angular-file-upload.js"></script>
-    <script src="controllers.js"></script>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" type="text/css" href="vendor/bootstrap/dist/css/bootstrap.css">
 
-    <style>
-        .my-drop-zone {
-            border: dotted 3px lightgray;
-        }
+  <!-- Main Style -->
+  <link rel="stylesheet" type="text/css" href="css/main.css">
 
-        .ng-file-over {
-            border: dotted 3px red;
-        }
+  <!-- Responsive Style -->
+  <link rel="stylesheet" type="text/css" href="css/responsive.css">
 
-        /* Default class applied to drop zones on over */
-        .another-file-over-class {
-            border: dotted 3px green;
-        }
+  <!--Icon Font-->
+  <link rel="stylesheet" media="screen" href="fonts/font-awesome/font-awesome.min.css" />
 
-        html, body {
-            height: 100%;
-        }
-    </style>
+  <!-- Extras -->
+  <link rel="stylesheet" type="text/css" href="extras/animate.css">
+
+
+  <!-- jQuery Load -->
+  <script src="vendor/jquery/dist/jquery.js"></script>
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+  <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
 </head>
 
-<!-- 1. ng-file-drop | ng-file-drop="options" -->
-<body ng-controller="TestController" ng-file-drop>
+<body>
+  <!-- Nav Menu Section -->
+  <header>
+    <div class="logo-menu">
+      <nav class="navbar navbar-default">
+        <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header col-md-3">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" ui-sref="home"><i class="fa fa-fa fa-cubes"></i> CallPlanner</a>
+          </div>
 
-<div class="container">
-
-    <div class="navbar navbar-default">
-        <div class="navbar-header">
-            <a class="navbar-brand"
-               href="https://github.com/strongloop/loopback-component-storage">LoopBack
-                Storage Service</a>
+          <div class="collapse navbar-collapse" id="navbar">
+            <ul class="nav navbar-nav pull-right">
+              <li>
+                <a ui-sref="home">Home</a>
+              </li>
+              <li>
+                <a ui-sref="features">Features</a>
+              </li>
+              <li>
+                <a ui-sref="login">Sign In</a>
+              </li>
+              <li>
+                <a ui-sref="signup">Sign Up</a>
+              </li>
+            </ul>
+          </div>
         </div>
+      </nav>
     </div>
+  </header>
+  <!-- Nav Menu Section End -->
 
-    <div class="row">
-
-        <div class="col-md-3">
-
-            <h3>Select files</h3>
-
-            <div ng-show="uploader.isHTML5">
-                <!-- 3. ng-file-over | ng-file-over="className" -->
-                <div class="well my-drop-zone" ng-file-over>
-                    Base drop zone
-                </div>
-
-                <!-- Example: ng-file-drop | ng-file-drop="options" -->
-                <div class="well my-drop-zone" ng-file-drop="{ url: '/foo' }"
-                     ng-file-over="another-file-over-class">
-                    Another drop zone with its own settings
-                </div>
-            </div>
-
-            <!-- 2. ng-file-select | ng-file-select="options" -->
-            Multiple
-            <input ng-file-select type="file" multiple/><br/>
-
-            Single
-            <input ng-file-select type="file"/>
+  
+  <main ui-view></main>
+  
+  <section id="bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 col-sm-3 col-xs-12">
+            <h3>Products</h3>
+            <ul>
+              <li><a href="#">Paypal</a>
+              </li>
+              <li><a href="#">BitCoin</a>
+              </li>
+              <li><a href="#">Skrill</a>
+              </li>
+              <li><a href="#">Alertpay</a>
+              </li>
+              <li><a href="#">Payoneer</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3 col-sm-3 col-xs-12">
+            <h3>FAQs</h3>
+            <ul>
+              <li><a href="#">Why choose us?</a>
+              </li>
+              <li><a href="#">Where we are?</a>
+              </li>
+              <li><a href="#">Fees</a>
+              </li>
+              <li><a href="#">Guarantee</a>
+              </li>
+              <li><a href="#">Discount</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3 col-sm-3 col-xs-12">
+            <h3>About</h3>
+            <ul>
+              <li><a href="#">Career</a>
+              </li>
+              <li><a href="#">Partners</a>
+              </li>
+              <li><a href="#">Team</a>
+              </li>
+              <li><a href="#">Clients</a>
+              </li>
+              <li><a href="#">Contact</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3 col-sm-3 col-xs-12">
+            <h3>Find us on</h3>
+            <a class="social" href="#" target="_blank"><i class="fa fa-facebook fa-2x"></i></a>
+            <a class="social" href="#" target="_blank"><i class="fa fa-twitter fa-2x"></i></a>
+            <a class="social" href="#" target="_blank"><i class="fa fa-google-plus fa-2x"></i></a>
+            <a class="social" href="#" target="_blank"><i class="fa fa-linkedin fa-2x"></i></a>
+          </div>
         </div>
+      </div>
+    </section>
 
-        <div class="col-md-9" style="margin-bottom: 40px">
+  <!-- Bootstrap JS -->
+    <!-- WOW JS plugin for animation -->
+  <script src="vendor/wow.js"></script>
+  <!-- All JS plugin Triggers -->
+  <script src="vendor/main.js"></script>
 
-            <h3>Upload queue</h3>
+  <script src="vendor/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="vendor/angular/angular.js"></script>
+  <script src="vendor/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="vendor/angular-resource/angular-resource.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/services/lb-services.js"></script>
+  <script src="js/controllers/auth.js"></script>
+  <script src="js/controllers/review.js"></script>
+  <script src="js/services/auth.js"></script>
 
-            <p>Queue length: {{ uploader.queue.length }}</p>
 
-            <table class="table">
-                <thead>
-                <tr>
-                    <th width="50%">Name</th>
-                    <th ng-show="uploader.isHTML5">Size</th>
-                    <th ng-show="uploader.isHTML5">Progress</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="item in uploader.queue">
-                    <td><strong>{{ item.file.name }}</strong></td>
-                    <td ng-show="uploader.isHTML5" nowrap>{{
-                        item.file.size/1024/1024|number:2 }} MB
-                    </td>
-                    <td ng-show="uploader.isHTML5">
-                        <div class="progress" style="margin-bottom: 0;">
-                            <div class="progress-bar" role="progressbar"
-                                 ng-style="{ 'width': item.progress + '%' }"></div>
-                        </div>
-                    </td>
-                    <td class="text-center">
-                        <span ng-show="item.isSuccess"><i
-                                class="glyphicon glyphicon-ok"></i></span>
-                        <span ng-show="item.isCancel"><i
-                                class="glyphicon glyphicon-ban-circle"></i></span>
-                        <span ng-show="item.isError"><i
-                                class="glyphicon glyphicon-remove"></i></span>
-                    </td>
-                    <td nowrap>
-                        <button type="button" class="btn btn-success btn-xs"
-                                ng-click="item.upload()"
-                                ng-disabled="item.isReady || item.isUploading || item.isSuccess">
-                            <span class="glyphicon glyphicon-upload"></span>
-                            Upload
-                        </button>
-                        <button type="button" class="btn btn-warning btn-xs"
-                                ng-click="item.cancel()"
-                                ng-disabled="!item.isUploading">
-                            <span class="glyphicon glyphicon-ban-circle"></span>
-                            Cancel
-                        </button>
-                        <button type="button" class="btn btn-danger btn-xs"
-                                ng-click="item.remove()">
-                            <span class="glyphicon glyphicon-trash"></span>
-                            Remove
-                        </button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-
-            <div>
-                <p>
-                    Queue progress:
-
-                <div class="progress" style="">
-                    <div class="progress-bar" role="progressbar"
-                         ng-style="{ 'width': uploader.progress + '%' }"></div>
-                </div>
-                </p>
-                <button type="button" class="btn btn-success btn-s"
-                        ng-click="uploader.uploadAll()"
-                        ng-disabled="!uploader.getNotUploadedItems().length">
-                    <span class="glyphicon glyphicon-upload"></span> Upload all
-                </button>
-                <button type="button" class="btn btn-warning btn-s"
-                        ng-click="uploader.cancelAll()"
-                        ng-disabled="!uploader.isUploading">
-                    <span class="glyphicon glyphicon-ban-circle"></span> Cancel
-                    all
-                </button>
-                <button type="button" class="btn btn-danger btn-s"
-                        ng-click="uploader.clearQueue()"
-                        ng-disabled="!uploader.queue.length">
-                    <span class="glyphicon glyphicon-trash"></span> Remove all
-                </button>
-            </div>
-
-        </div>
-
-        <div class="col-md-9" style="margin-bottom: 40px"
-             ng-controller="FilesController" data-ng-init="load()">
-
-            <h3>Files in the container</h3>
-
-            <table class="table">
-
-                <tbody>
-                <tr ng-repeat="file in files">
-                    <td>
-                        <a href="/api/mentContainers/01044929599/download/{{file.name}}"><strong>{{
-                            file.name }}</strong></a></td>
-                    <td>
-                    <td>
-                        <button type="button" class="btn btn-danger btn-xs"
-                                ng-click="delete($index, file.name)"
-                                title="Delete the file">
-                            <span class="glyphicon glyphicon-trash"></span>
-                            Remove
-                        </button>
-
-                    </td>
-                    </button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-
-    </div>
-
-</div>
 
 </body>
 </html>

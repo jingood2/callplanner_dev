@@ -6,18 +6,27 @@
     "pretest": "jshint ."
   },
   "dependencies": {
+    "agenda": "^0.6.28",
     "compression": "^1.0.3",
     "errorhandler": "^1.1.1",
     "loopback": "^2.8.0",
     "loopback-boot": "^2.6.5",
     "loopback-connector-mongodb": "^1.8.0",
     "loopback-datasource-juggler": "^2.7.0",
-    "serve-favicon": "^2.0.1"
+    "loopback-storage-service": "^1.0.4",
+    "morgan": "^1.5.2",
+    "request": "^2.55.0",
+    "serve-favicon": "^2.0.1",
+    "strong-logger": "0.0.3",
+    "winston": "^1.0.0"
   },
   "optionalDependencies": {
     "loopback-explorer": "^1.1.0"
   },
   "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-docular": "^0.2.4",
+    "grunt-loopback-sdk-angular": "^1.1.2",
     "jshint": "^2.5.6"
   },
   "repository": {

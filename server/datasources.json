@@ -15,18 +15,18 @@
     "name": "mentStorage",
     "connector": "loopback-storage-service",
     "provider": "filesystem",
-    "root": "/Users/admin/nfs/ments"
+    "root": "/nfs/ments"
   },
   "imageStorage": {
     "name": "imageStorage",
     "connector": "loopback-storage-service",
     "provider": "filesystem",
-    "root": "/Users/admin/nfs/images"
+    "root": "/nfs/images"
   },
   "recordStorage": {
     "name": "recordStorage",
     "connector": "loopback-storage-service",
     "provider": "filesystem",
-    "root": "/Users/admin/nfs/records"
+    "root": "/nfs/records"
   }
 }

@@ -8,8 +8,6 @@ module.exports = function(Planner) {
     var req = ctx.req;
     var host = req.headers.host;
 
-    log.info('Created user...');
-
     request({
       url: 'http://' + host + '/api/mentContainers',
       method: "POST",
@@ -17,7 +15,7 @@ module.exports = function(Planner) {
       body: { "name" : req.body.phone}
     }, function( error, response, body ) {
       if(error)
-        log.error(error);
+        logger.error(error);
     });
 
     request({
@@ -27,7 +25,7 @@ module.exports = function(Planner) {
       body: { "name" : req.body.phone}
     }, function( error, response, body ) {
       if(error)
-        log.error(error);
+        logger.error(error);
     });
     next();
 

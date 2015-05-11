@@ -22,11 +22,9 @@ exports.reqCall = function (jobName, plan) {
         var CallHistory = app.models.callHistory;
         var planInfo = [];
 
-        console.log(CallHistory.modelName);
-
         // planCall off
         if(job.attrs.data.enabled == false) {
-            console.log('disabled planCall id : ' + job.attrs.data.id);
+            logger.info('disabled planCall id : ' + job.attrs.data.id);
             done();
             return;
         }
@@ -35,7 +33,7 @@ exports.reqCall = function (jobName, plan) {
             ment = 'ments/' + job.attrs.data.ment.container + '/' + job.attrs.data.ment.file;
 
         recordFilename = new Date().toISOString() + '.wav';
-        console.log('recordFile :' + recordFilename);
+        logger.debug('recordFile :' + recordFilename);
 
         reqBody = {
             "method" : "INIT",
@@ -46,7 +44,6 @@ exports.reqCall = function (jobName, plan) {
             "greetingAnn" : ment,
             "attendants" : job.attrs.data.attendants };
 
-        console.log(JSON.stringify(reqBody));
 
         request({
         url: "http://221.146.204.182:9087/FamilyCallCore/FamilyCallHttpServlet",
@@ -56,6 +53,8 @@ exports.reqCall = function (jobName, plan) {
         }, function( error, response, body ) {
 
             if(!error && response.statusCode == 200) {
+
+              logger.info(JSON.stringify(reqBody));
 
                 var calledAt = new Date();
 
@@ -75,11 +74,13 @@ exports.reqCall = function (jobName, plan) {
                     planCalledAt : calledAt,
                     result : response.statusCode},function(err,obj) {
 
-                    if(error) {
-                        console.log(err);
+                    if(err) {
+                        logger.error(err);
                     }
                 });
 
+            } else {
+              logger.error(error);
             }
         });
 
@@ -99,7 +100,7 @@ exports.reqCall = function (jobName, plan) {
 
     job.save(function(err) {
         if(err) {
-            console.log('SaveJob Error :' + err);
+            logger.error('SaveJob Error :' + err);
         }
     });
 
@@ -109,7 +110,7 @@ exports.reqCall = function (jobName, plan) {
 exports.deleteCall = function(jobName) {
 
   agenda.cancel({name: jobName}, function(err, numRemoved) {
-    if(!err) console.log('[planId:%s] number of removed : %d',jobName, numRemoved);
+    if(!err) logger.error('[planId:%s] number of removed : %d',jobName, numRemoved);
   })
 
 };

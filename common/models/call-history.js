@@ -5,7 +5,7 @@ module.exports = function(CallHistory) {
 
         CallHistory.find({ where: { plannerId: request.accessToken.userId}},function(err,callHistories){
             if(err) {
-               log.error(err);
+               logger.error(err);
             }
             cb(err,callHistories);
         });

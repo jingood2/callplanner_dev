@@ -1,0 +1,14 @@
+{"level":"info","message":"Web server listening at: http://192.168.4.29:3000/","timestamp":"2015-05-08T05:37:48.623Z"}
+"2015-05-08T05:38:32.612Z"
+{"level":"info","message":"scheduledAt : Fri May 08 2015 14:40:00 GMT+0900 (KST) min:40 hour:14 day:8","timestamp":"2015-05-08T05:38:32.617Z"}
+{"code":"ETIMEDOUT","errno":"ETIMEDOUT","syscall":"connect","level":"error","timestamp":"2015-05-08T05:39:47.703Z"}
+{"level":"debug","message":"recordFile :2015-05-08T05:40:00.006Z.wav","timestamp":"2015-05-08T05:40:00.006Z"}
+{"level":"info","message":"{\"method\":\"INIT\",\"id\":\"554c4bd8c2dfb9782379d42e\",\"record\":false,\"recordFilename\":\"2015-05-08T05:40:00.006Z.wav\",\"callType\":\"time\",\"greetingAnn\":\"\",\"attendants\":[{\"tel\":\"01044929599\",\"role\":\"owner\"}]}","timestamp":"2015-05-08T05:40:00.060Z"}
+{"level":"info","message":"Web server listening at: http://192.168.4.29:3000/","timestamp":"2015-05-08T06:01:57.451Z"}
+{"level":"info","message":"Web server listening at: http://192.168.4.29:3000/","timestamp":"2015-05-08T06:01:57.448Z"}
+{"level":"info","message":"Web server listening at: http://192.168.4.29:3000/","timestamp":"2015-05-08T06:01:57.529Z"}
+{"level":"info","message":"Web server listening at: http://192.168.4.29:3000/","timestamp":"2015-05-08T06:01:57.569Z"}
+{"level":"info","message":"Web server listening at: http://192.168.4.29:3000/","timestamp":"2015-05-08T06:01:57.650Z"}
+{"level":"info","message":"Web server listening at: http://192.168.4.29:3000/","timestamp":"2015-05-08T06:01:57.688Z"}
+{"level":"info","message":"Web server listening at: http://192.168.4.29:3000/","timestamp":"2015-05-08T06:01:57.732Z"}
+{"level":"info","message":"Web server listening at: http://192.168.4.29:3000/","timestamp":"2015-05-08T06:01:57.745Z"}

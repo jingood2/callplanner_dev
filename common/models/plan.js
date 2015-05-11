@@ -18,12 +18,12 @@ module.exports = function(Plan) {
       if(ctx.instance) {
 
         ctx.instance.modified = new Date();
-        log.info('[Operation hook] before created at %s',  ctx.instance.modified  );
+        logger.debug('[Operation hook] before created at %s',  ctx.instance.modified  );
       }else {
         ctx.data.modified = new Date();
         planJobName = String(ctx.where.id);
 
-        log.info('[Operation hook]before update : %s', planJobName);
+        logger.debug('[Operation hook]before update : %s', planJobName);
       }
       next();
 
@@ -57,13 +57,11 @@ module.exports = function(Plan) {
             phones.push(attendant.tel);
           });
 
-          log.info(phones);
-
           var Planner = app.models.Planner;
 
           Planner.find( {where: { phone: {inq: phones}}},function(err,planners) {
              if(err) {
-                log.error(err);
+                logger.error(err);
                 next();
              }
 
@@ -71,8 +69,6 @@ module.exports = function(Plan) {
             planners.forEach(function(planner) {
               noti.push(planner.id);
             });
-
-            //message = '[Title:' + ctx.instance.title  + ']' + 'You were invited from 'xxx' at time ';
 
             var reqBody = {
               noti: noti,
@@ -89,9 +85,9 @@ module.exports = function(Plan) {
                   }, function( error, response, body ) {
 
                   if(!error && response.statusCode == 200)
-                      log.info(body);
+                      logger.info(body);
                   else
-                      log.error(error);
+                      logger.error(error);
 
             });
 
@@ -99,17 +95,8 @@ module.exports = function(Plan) {
 
       } else {
 
-        log.info('[Operation hook] after updated..');
+        logger.debug('[Operation hook] after updated..');
 
-        /*
-        agendaJobId = String(ctx.data.id);
-
-        console.log('[Remote hook]before delete : %s', agendaJobId);
-        planCallJob.deleteCall(agendaJobId);
-
-        console.log('[Remote hook]before update : %s', agendaJobId);
-        planCallJob.reqCall(agendaJobId,ctx.data);
-        */
       } // instance
       next();
 

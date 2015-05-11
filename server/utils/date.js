@@ -8,7 +8,7 @@ exports.planStartAt = (function(repeat,scheduledAt) {
   var startDate = scheduledAt;
   var whichday;
 
-  console.log('scheduledAt : %s min:%s hour:%s day:%s', startDate, startDate.getMinutes(),startDate.getHours(),startDate.getDate());
+  logger.info('scheduledAt : %s min:%s hour:%s day:%s', startDate, startDate.getMinutes(),startDate.getHours(),startDate.getDate());
 
   switch(repeat) {
 
