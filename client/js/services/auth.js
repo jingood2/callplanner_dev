@@ -1,9 +1,9 @@
 angular
   .module('app')
-  .factory('AuthService', ['Planner', '$q', '$rootScope', function(Planner, $q,
+  .factory('AuthService', ['Planner', '$q', '$rootScope', function(User, $q,
       $rootScope) {
     function login(email, password) {
-      return Planner
+      return User
         .login({email: email, password: password})
         .$promise
         .then(function(response) {
@@ -16,16 +16,20 @@ angular
     }
 
     function logout() {
-      return Planner
+      return User
        .logout()
        .$promise
        .then(function() {
+
+         console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
          $rootScope.currentUser = null;
+         console.log('currentUser:' + $rootScope.currentUser);
+         console.log('YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY');
        });
     }
 
     function register(email, password, phone) {
-      return Planner
+      return User
         .create({
          email: email,
          password: password,

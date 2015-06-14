@@ -8,6 +8,7 @@ module.exports = function(Planner) {
     var req = ctx.req;
     var host = req.headers.host;
 
+    /*
     request({
       url: 'http://' + host + '/api/mentContainers',
       method: "POST",
@@ -27,6 +28,7 @@ module.exports = function(Planner) {
       if(error)
         logger.error(error);
     });
+    */
     next();
 
   });

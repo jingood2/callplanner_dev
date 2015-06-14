@@ -7,7 +7,7 @@ angular
     $scope.login = function() {
       AuthService.login($scope.planner.email, $scope.planner.password)
         .then(function() {
-          $state.go('add-review');
+          $state.go('app');
         });
     };
   }])
@@ -15,7 +15,9 @@ angular
       function($scope, AuthService, $state) {
     AuthService.logout()
       .then(function() {
-        $state.go('all-reviews');
+        $rootScope.currentUser = null;
+        console.log('ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ');
+        $state.go('home');
       });
   }])
   .controller('SignUpController', ['$scope', 'AuthService', '$state',
@@ -25,7 +27,7 @@ angular
     $scope.register = function() {
       AuthService.register($scope.planner.email, $scope.planner.password, $scope.planner.phone)
         .then(function() {
-          $state.transitionTo('sign-up-success');
+          $state.transitionTo('home.sign-up-success');
         });
     };
   }]);
